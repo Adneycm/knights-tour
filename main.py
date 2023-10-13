@@ -1,8 +1,12 @@
 import numpy as np
 
+my_dict = {'apple': 3, 'banana': 1, 'cherry': 2, 'date': 4}
 
-l = [1,2,3,4,5,6,7,8,9]
-l.pop(-1)
-l.pop(-1)
+# Sort the dictionary by values in ascending order
+sorted_dict = dict(sorted(my_dict.items(), key=lambda item: item[1]))
 
-print(l)
+# Get the keys in sorted order
+sorted_keys = list(sorted_dict.keys())
+
+print(sorted_keys)
+
