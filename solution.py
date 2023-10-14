@@ -23,6 +23,14 @@ class KnightsTour:
         self.table = np.zeros((n, n), dtype=int)
         self.table[x, y] = 1
         self.solution = [(self.x, self.y)]
+        self.solutionVisualization = {(self.x, self.y):1}
+
+    def getTable(self):
+        return self.table
+    def getSolutionVisualization(self):
+        return self.solutionVisualization
+    def getSolution(self):
+        return self.solution
 
     def possibleMove(self, move):
         # 1. Removing moves that go out of the table
@@ -75,10 +83,10 @@ class KnightsTour:
         return moves
 
     def tour(self):
-        print(self.table)
+        # print(self.table)
         # if all squares are visited
         if len(self.solution) == self.n**2:
-            print(self.table)
+            # print(self.table)
             return True
         
         position = self.solution[-1]
@@ -88,22 +96,26 @@ class KnightsTour:
             return False
         for move in moves:
             self.solution.append(move)
+            self.solutionVisualization[move] = 1 ############
             self.table[move] = len(self.solution)
             if self.tour():
                 return True
             else:
                 self.solution.pop(-1)
+                self.solutionVisualization[move] = 0 ############
                 self.table[move] = 0
 
         return False
 
 
         
-k = KnightsTour(8, 2, 4)
-if k.tour():
-    print("Table completed!")
-else:
-    print("Table incompleted :(")
+# k = KnightsTour(9, 5, 6)
+# if k.tour():
+#     print("Table completed!")
+# else:
+#     print("Table incompleted :(")
+
+# print(k.getSolutionVisualization(), len(k.getSolutionVisualization()))
         
 
     
