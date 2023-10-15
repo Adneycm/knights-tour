@@ -9,121 +9,109 @@ class Visualization:
         self.WIDTH = WIDTH
         self.HEIGHT = HEIGHT
         self.WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-        self.image = pygame.image.load("knight.png")
+
+        self.image = pygame.image.load("img/knight.png")
+        self.imageRect = self.image.get_rect()
+
         self.font = pygame.font.Font(None, 36)
+
+        self.selectedSquare = None
+
+        self.run = False
+        self.tour = False
 
 
     def initialize(self):
-        pygame.display.set_caption("Knights Tour")
         pygame.init()
-
+        pygame.display.set_caption("Knights Tour")
         self.image = pygame.transform.scale(self.image, (SQUARE_SIZE, SQUARE_SIZE))
 
+    def drawBoard(self):
+        # Draw the chessboard
+        for row in range(ROWS):
+            for col in range(COLS):
+                color = WHITE if (row + col) % 2 == 0 else GREEN
+                pygame.draw.rect(self.WIN, color, (col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
 
+    def drawKnight(self, coordinates):
+        row, col = coordinates
+        self.imageRect.topleft = (col * SQUARE_SIZE, row * SQUARE_SIZE)
+        screen.blit(self.image, self.imageRect)
 
+    def drawPosition(self, coordinates, n):
+        row, col = coordinates
+        text = font.render(str(n), True, RED)
+        textRect = text.get_rect()
+        textRect.center = (col * SQUARE_SIZE + 40, row * SQUARE_SIZE + 40)
+        screen.blit(text, textRect)
 
-WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Knights Tour")
+    def drawTour(self, row, col):
+        k = KnightsTour(ROWS, row, col)
+        if k.tour():
+            path = k.getSolution()
+            print("solucionado!")
 
-# Initialize Pygame
-pygame.init()
+        i = 1
+        for move in path[1:]:
+            self.drawBoard()
+            self.drawKnight(move)
 
-# Create a window
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Knights Tour")
+            # Número do movimento
+            aux = 1
+            for move in path[:i]:
+                self.drawPosition(move, aux)
+                aux+=1
 
-# Load the image
-image = pygame.image.load("knight.png")
+            i+=1
+            time.sleep(.5)
+            pygame.display.update()
 
-# Resize the image to fit the chessboard squares
-image = pygame.transform.scale(image, (SQUARE_SIZE, SQUARE_SIZE))
+    def visualize(self):
+        self.run = True
+        self.tour = False
+        while self.run:
+            for event in pygame.event.get():
 
-# Initialize a font
-font = pygame.font.Font(None, 36)
+                if event.type == pygame.QUIT:
+                    self.run = False
 
-# Initialize variables
-selected_square = None  # Stores the selected square
-image_rect = image.get_rect()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    # Get the coordinates of the click
+                    x, y = pygame.mouse.get_pos()
+                    col = x // SQUARE_SIZE
+                    row = y // SQUARE_SIZE
+                    self.selectedSquare = (row, col)
 
-def drawBoard():
-    # Draw the chessboard
-    for row in range(ROWS):
-        for col in range(COLS):
-            color = WHITE if (row + col) % 2 == 0 else GREEN
-            pygame.draw.rect(screen, color, (col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.tour = True
+                
+            if self.tour:
+                self.drawTour(row, col)
 
-def drawKnight(coordinates):
-    row, col = coordinates
-    image_rect.topleft = (col * SQUARE_SIZE, row * SQUARE_SIZE)
-    screen.blit(image, image_rect)
+            while self.tour:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        self.run = False
+                        self.tour = False
 
-def drawPosition(coordinates, n):
-    row, col = coordinates
-    text = font.render(str(n), True, RED)
-    text_rect = text.get_rect()
-    text_rect.center = (col * SQUARE_SIZE + 40, row * SQUARE_SIZE + 40)
-    screen.blit(text, text_rect)
+                    if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.K_c:
+                                self.tour = False
+                
+            # Draw the chessboard
+            self.drawBoard()
 
-def drawTour(row, col):
-    k = KnightsTour(ROWS, row, col)
-    if k.tour():
-        path = k.getSolution()
-        print("solucionado!")
+            # Draw the selected image on the clicked square
+            if self.selectedSquare is not None:
+                self.drawKnight(self.selectedSquare)
 
-    i = 1
-    for move in path[1:]:
-        drawBoard()
-        drawKnight(move)
+            # Update the display
+            pygame.display.update()
 
-        # Número do movimento
-        aux = 1
-        for move in path[:i]:
-            drawPosition(move, aux)
-            aux+=1
+        # Quit Pygame
+        pygame.quit()
 
-        i+=1
-        time.sleep(.5)
-        pygame.display.update()
-
-
-# Main loop
-running = True
-tour = False
-while running:
-    for event in pygame.event.get():
-
-        if event.type == pygame.QUIT:
-            running = False
-
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            # Get the coordinates of the click
-            x, y = pygame.mouse.get_pos()
-            col = x // SQUARE_SIZE
-            row = y // SQUARE_SIZE
-            selected_square = (row, col)
-
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                tour = True
-        
-    if tour:
-        drawTour(row, col)
-
-    while tour:
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_c:
-                        tour = False
-        
-    # Draw the chessboard
-    drawBoard()
-
-    # Draw the selected image on the clicked square
-    if selected_square is not None:
-        drawKnight(selected_square)
-
-    # Update the display
-    pygame.display.update()
-
-# Quit Pygame
-pygame.quit()
+v = Visualization(WIDTH, HEIGHT)
+v.initialize()
+v.visualize()
