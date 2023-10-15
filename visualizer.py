@@ -113,7 +113,3 @@ class Visualization:
 
         # Quit Pygame
         pygame.quit()
-
-v = Visualization(WIDTH, HEIGHT)
-v.initialize()
-v.visualize()
