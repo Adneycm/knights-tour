@@ -106,16 +106,6 @@ class KnightsTour:
                 self.table[move] = 0
 
         return False
-
-
-        
-# k = KnightsTour(9, 5, 6)
-# if k.tour():
-#     print("Table completed!")
-# else:
-#     print("Table incompleted :(")
-
-# print(k.getSolutionVisualization(), len(k.getSolutionVisualization()))
         
 
     

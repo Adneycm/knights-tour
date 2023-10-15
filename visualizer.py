@@ -20,9 +20,9 @@ class Visualization:
     def initialize(self):
         pygame.init()
         self.WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-        pygame.display.set_caption("Knights Tour")
+        pygame.display.set_caption(CAPTION)
         # Knight's Image
-        self.image = pygame.image.load("img/knight.png")
+        self.image = pygame.image.load(IMAGE)
         self.image = pygame.transform.scale(self.image, (SQUARE_SIZE, SQUARE_SIZE))
         self.imageRect = self.image.get_rect()
         # Font
