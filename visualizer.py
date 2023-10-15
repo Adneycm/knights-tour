@@ -8,23 +8,25 @@ class Visualization:
     def __init__(self, WIDTH, HEIGHT):
         self.WIDTH = WIDTH
         self.HEIGHT = HEIGHT
-        self.WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-
-        self.image = pygame.image.load("img/knight.png")
-        self.imageRect = self.image.get_rect()
-
-        self.font = pygame.font.Font(None, 36)
-
+        self.WIN = None
+        self.image = None
+        self.imageRect = None
+        self.font = None
         self.selectedSquare = None
-
         self.run = False
         self.tour = False
 
 
     def initialize(self):
         pygame.init()
+        self.WIN = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("Knights Tour")
+        # Knight's Image
+        self.image = pygame.image.load("img/knight.png")
         self.image = pygame.transform.scale(self.image, (SQUARE_SIZE, SQUARE_SIZE))
+        self.imageRect = self.image.get_rect()
+        # Font
+        self.font = pygame.font.Font(None, 36)
 
     def drawBoard(self):
         # Draw the chessboard
@@ -36,14 +38,14 @@ class Visualization:
     def drawKnight(self, coordinates):
         row, col = coordinates
         self.imageRect.topleft = (col * SQUARE_SIZE, row * SQUARE_SIZE)
-        screen.blit(self.image, self.imageRect)
+        self.WIN.blit(self.image, self.imageRect)
 
     def drawPosition(self, coordinates, n):
         row, col = coordinates
-        text = font.render(str(n), True, RED)
+        text = self.font.render(str(n), True, RED)
         textRect = text.get_rect()
         textRect.center = (col * SQUARE_SIZE + 40, row * SQUARE_SIZE + 40)
-        screen.blit(text, textRect)
+        self.WIN.blit(text, textRect)
 
     def drawTour(self, row, col):
         k = KnightsTour(ROWS, row, col)
