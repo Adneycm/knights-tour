@@ -8,47 +8,98 @@ class Visualization:
     def __init__(self, WIDTH, HEIGHT):
         self.WIDTH = WIDTH
         self.HEIGHT = HEIGHT
+        self.ROWS = 8
+        self.COLS = 8
+        self.SQUARE_SIZE = (self.WIDTH-200) // self.COLS
+        self.B_WIDTH = self.COLS * self.SQUARE_SIZE
+        self.B_HEIGHT = self.ROWS * self.SQUARE_SIZE
+        self.B_X = (self.WIDTH - self.B_WIDTH) // 2
+        self.B_Y = (self.HEIGHT - self.B_HEIGHT) // 2
+
         self.WIN = None
         self.image = None
         self.imageRect = None
         self.font = None
         self.selectedSquare = None
-        self.run = False
+        self.moveSound = None
+        self.run = True
         self.tour = False
-
+        
 
     def initialize(self):
         pygame.init()
+        pygame.mixer.init()
         self.WIN = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption(CAPTION)
-        # Knight's Image
-        self.image = pygame.image.load(IMAGE)
-        self.image = pygame.transform.scale(self.image, (SQUARE_SIZE, SQUARE_SIZE))
-        self.imageRect = self.image.get_rect()
+        self.WIN.fill(BLUE)
+        # Move Sound
+        self.moveSound = pygame.mixer.Sound(AUDIO_MOVE)
         # Font
         self.font = pygame.font.Font(None, 36)
+        # Knight's Image
+        self.image = pygame.image.load(IMG_KNIGHT)
+        self.image = pygame.transform.scale(self.image, (self.SQUARE_SIZE, self.SQUARE_SIZE))
+        self.imageRect = self.image.get_rect()  
+
+    def boardSize(self):
+        self.SQUARE_SIZE = (self.WIDTH-200) // self.COLS
+        self.B_WIDTH = self.COLS * self.SQUARE_SIZE
+        self.B_HEIGHT = self.ROWS * self.SQUARE_SIZE
+        self.B_X = (self.WIDTH - self.B_WIDTH) // 2
+        self.B_Y = (self.HEIGHT - self.B_HEIGHT) // 2
+
+        self.image = pygame.image.load(IMG_KNIGHT)
+        self.image = pygame.transform.scale(self.image, (self.SQUARE_SIZE, self.SQUARE_SIZE))
+        self.imageRect = self.image.get_rect()
+
+    def drawTitle(self):
+        title = self.font.render(CAPTION, True, DARKBLUE)
+        titleRect = title.get_rect()
+        titleRect.center = (WIDTH//2,HEIGHT//2 - 330)
+        self.WIN.blit(title, titleRect)
+
+    def drawC(self):
+        c = pygame.image.load(IMG_C)
+        c = pygame.transform.scale(c, (60, 60))
+        cRect = c.get_rect()
+        cRect.center = (WIDTH//2 - 220 ,HEIGHT//2 - 290)
+        self.WIN.blit(c, cRect)
+        cInst = self.font.render("Clear board", True, DARKBLUE)
+        cInstRect = cInst.get_rect()
+        cInstRect.center = (WIDTH//2 - 120, HEIGHT//2 - 290)
+        self.WIN.blit(cInst, cInstRect)
+
+    def drawSpace(self):
+        space = pygame.image.load(IMG_SPACE)
+        space = pygame.transform.scale(space, (120, 120))
+        spaceRect = space.get_rect()
+        spaceRect.center = (WIDTH//2 + 220 ,HEIGHT//2 - 290)
+        self.WIN.blit(space, spaceRect)
+        spaceInst = self.font.render("Start tour", True, DARKBLUE)
+        spaceInstRect = spaceInst.get_rect()
+        spaceInstRect.center = (WIDTH//2 + 120, HEIGHT//2 - 290)
+        self.WIN.blit(spaceInst, spaceInstRect)
 
     def drawBoard(self):
-        # Draw the chessboard
-        for row in range(ROWS):
-            for col in range(COLS):
-                color = WHITE if (row + col) % 2 == 0 else GREEN
-                pygame.draw.rect(self.WIN, color, (col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+        for row in range(self.ROWS):
+            for col in range(self.COLS):
+                color = WHITE if (row + col) % 2 == 0 else BLACK
+                pygame.draw.rect(self.WIN, color, (self.B_X + col * self.SQUARE_SIZE, self.B_Y + row * self.SQUARE_SIZE, self.SQUARE_SIZE, self.SQUARE_SIZE))
 
     def drawKnight(self, coordinates):
         row, col = coordinates
-        self.imageRect.topleft = (col * SQUARE_SIZE, row * SQUARE_SIZE)
+        self.imageRect.topleft = (self.B_X + col * self.SQUARE_SIZE, self.B_Y + row * self.SQUARE_SIZE)
         self.WIN.blit(self.image, self.imageRect)
 
     def drawPosition(self, coordinates, n):
         row, col = coordinates
-        text = self.font.render(str(n), True, RED)
+        text = self.font.render(str(n), True, DARKBLUE)
         textRect = text.get_rect()
-        textRect.center = (col * SQUARE_SIZE + 40, row * SQUARE_SIZE + 40)
+        textRect.center = (self.B_X + col * self.SQUARE_SIZE + 30, self.B_Y + row * self.SQUARE_SIZE + 30)
         self.WIN.blit(text, textRect)
 
     def drawTour(self, row, col):
-        k = KnightsTour(ROWS, row, col)
+        k = KnightsTour(self.ROWS, row, col)
         if k.tour():
             path = k.getSolution()
             print("solucionado!")
@@ -66,28 +117,43 @@ class Visualization:
 
             i+=1
             time.sleep(.5)
+            self.moveSound.play()
             pygame.display.update()
 
+    def drawGame(self):
+        self.WIN.fill(BLUE)
+        self.boardSize()
+        self.drawTitle()
+        self.drawBoard()
+        self.drawC()
+        self.drawSpace()
+
     def visualize(self):
-        self.run = True
-        self.tour = False
+        self.drawGame()
         while self.run:
             for event in pygame.event.get():
 
                 if event.type == pygame.QUIT:
                     self.run = False
 
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    # Get the coordinates of the click
-                    x, y = pygame.mouse.get_pos()
-                    col = x // SQUARE_SIZE
-                    row = y // SQUARE_SIZE
-                    self.selectedSquare = (row, col)
-
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         self.tour = True
-                
+                    elif event.key in (pygame.K_5, pygame.K_6, pygame.K_7, pygame.K_8, pygame.K_9):
+                        self.selectedSquare = None
+                        n = int(pygame.key.name(event.key))
+                        self.ROWS = n
+                        self.COLS = n
+                        self.drawGame()
+
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    # Get the coordinates of the click
+                    x, y = pygame.mouse.get_pos()
+                    col = (x - self.B_X) // self.SQUARE_SIZE
+                    row = (y - self.B_Y) // self.SQUARE_SIZE
+                    if row >= 0 and row <= self.ROWS and col >= 0 and col <= self.COLS :
+                        self.selectedSquare = (row, col)
+
             if self.tour:
                 self.drawTour(row, col)
 
@@ -100,7 +166,7 @@ class Visualization:
                     if event.type == pygame.KEYDOWN:
                             if event.key == pygame.K_c:
                                 self.tour = False
-                
+            
             # Draw the chessboard
             self.drawBoard()
 

@@ -1,15 +1,20 @@
 # Constants
 WIDTH, HEIGHT = 700, 700
-ROWS, COLS = 8, 8
-SQUARE_SIZE = WIDTH // COLS
 
 # Colors
-BLACK = (0,0,0)
-WHITE = (255,255,255)
-GREEN = (0,165,77)
+BLACK = (128, 128, 128)
+WHITE = (255, 248, 231)
 GREY = (128,128,128)
-RED = (255, 0, 0)
+RED = (0, 128, 255)
+MARFIM = (255, 248, 231)
+GREY =  (211, 211, 211)
+DARKGREY = (128, 128, 128)
+BLUE = (192, 192, 216)
+DARKBLUE = (0, 0, 128)
 
 # Assets
-IMAGE = "img/knight.png"
+IMG_KNIGHT = "assets/img/knight.png"
+IMG_C = "assets/img/keyboard_c.png"
+IMG_SPACE = "assets/img/keyboard_space.png"
+AUDIO_MOVE = "assets/audio/move.mp3"
 CAPTION = "Knights Tour"
