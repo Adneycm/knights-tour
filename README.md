@@ -3,6 +3,8 @@ The Knight's Tour, a chess puzzle with origins dating back to the ninth century,
 
 ## Table of Contents
 - [About](#about)
+  - [Recursion](#recursion)
+  - [Warnsdorff's Rule](#Warnsdorff's-rule)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -12,4 +14,11 @@ The Knight's Tour, a chess puzzle with origins dating back to the ninth century,
 
 ## About
 
-Explain what your project does and why it's useful. Provide an overview of the project's main features or purpose.
+This project presents an engaging exploration of the Knight's Tour problem across a range of chessboard sizes, including 5x5, 6x6, 7x7, 8x8 and 9x9. It serves as an implementation and visualization of the Knight's Tour problem, featuring a solving algorithm constructed through recursion and the application of Warnsdorff's heuristic rule.
+
+
+### Recursion
+
+
+
+### Warnsdorff's Rule
