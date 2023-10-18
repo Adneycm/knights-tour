@@ -96,13 +96,13 @@ class KnightsTour:
             return False
         for move in moves:
             self.solution.append(move)
-            self.solutionVisualization[move] = 1 ############
+            self.solutionVisualization[move] = 1 
             self.table[move] = len(self.solution)
             if self.tour():
                 return True
             else:
                 self.solution.pop(-1)
-                self.solutionVisualization[move] = 0 ############
+                self.solutionVisualization[move] = 0 
                 self.table[move] = 0
 
         return False

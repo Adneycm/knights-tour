@@ -35,7 +35,7 @@ class Visualization:
         # Move Sound
         self.moveSound = pygame.mixer.Sound(AUDIO_MOVE)
         # Font
-        self.font = pygame.font.Font(None, 36)
+        self.font = pygame.font.Font(None, 28)
         # Knight's Image
         self.image = pygame.image.load(IMG_KNIGHT)
         self.image = pygame.transform.scale(self.image, (self.SQUARE_SIZE, self.SQUARE_SIZE))
@@ -93,10 +93,19 @@ class Visualization:
 
     def drawPosition(self, coordinates, n):
         row, col = coordinates
-        text = self.font.render(str(n), True, DARKBLUE)
+        text = self.font.render(str(n), True, WHITE)
         textRect = text.get_rect()
-        textRect.center = (self.B_X + col * self.SQUARE_SIZE + 30, self.B_Y + row * self.SQUARE_SIZE + 30)
+        textRect.center = (self.B_X + col * self.SQUARE_SIZE + self.SQUARE_SIZE//2, self.B_Y + row * self.SQUARE_SIZE + self.SQUARE_SIZE//2)
         self.WIN.blit(text, textRect)
+
+    def drawPath(self, coordinates, prevCoordinates):
+        row, col = coordinates
+        coordinates = (self.B_X + col * self.SQUARE_SIZE + self.SQUARE_SIZE//2, self.B_Y + row * self.SQUARE_SIZE + self.SQUARE_SIZE//2)
+        pygame.draw.circle(self.WIN, DARKBLUE, coordinates, self.SQUARE_SIZE*.2)
+        if prevCoordinates is not None:
+            prevRow, prevCol = prevCoordinates
+            prevCoordinates= (self.B_X + prevCol * self.SQUARE_SIZE + self.SQUARE_SIZE//2, self.B_Y + prevRow * self.SQUARE_SIZE + self.SQUARE_SIZE//2)
+            pygame.draw.line(self.WIN, DARKBLUE, coordinates, prevCoordinates, 5)  # 5 is the line width
 
     def drawTour(self, row, col):
         k = KnightsTour(self.ROWS, row, col)
@@ -109,9 +118,14 @@ class Visualization:
             self.drawBoard()
             self.drawKnight(move)
 
-            # Número do movimento
+            # Move path
+            prevMove = None
+            for move in path[:i+1]:
+                self.drawPath(move, prevMove)
+                prevMove = move
+            # Move number
             aux = 1
-            for move in path[:i]:
+            for move in path[:i+1]:
                 self.drawPosition(move, aux)
                 aux+=1
 
@@ -165,6 +179,7 @@ class Visualization:
 
                     if event.type == pygame.KEYDOWN:
                             if event.key == pygame.K_c:
+                                self.drawGame()
                                 self.tour = False
             
             # Draw the chessboard
