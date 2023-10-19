@@ -7,8 +7,6 @@ The Knight's Tour, a actually a mathematical problem ([Hamiltonian Path](https:/
   - [Recursion](#recursion)
   - [Warnsdorff's Rule](#warnsdorffs-rule)
 - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
 - [Acknowledgements](#acknowledgements)
@@ -23,15 +21,15 @@ This project presents an engaging exploration of the Knight's Tour problem acros
 
 First, let's begin by visualizing and considering how to tackle the Knight's Tour problem. Let's assume we start at position D5. Now, let's examine the potential moves available from this starting point:
 
-<img src="assets/img/example1.png" width="300">
+<img src="assets/img/example1.png" width="400">
 
 Because the knight moves in an 'L' shape, involving 2 moves in one direction and 1 in another, we have a total of 8 potential moves at our disposal. Let's select one:
 
-<img src="assets/img/example2.png" width="300">
+<img src="assets/img/example2.png" width="400">
 
 Now, you can see that we have only 7 possible moves since we have already been to one of them (D5). It's important to keep in mind that making the wrong choices of movements can lead to getting stuck in the tour. Let's take a look at the example below:
 
-<img src="assets/img/example3.png" width="300">
+<img src="assets/img/example3.png" width="400">
 
 In the example above, the knight moved as follows: F4, G6, E5, F7, and H8. From position H8, the knight has two options: G6 and F7, but unfortunately, these have already been visited. In this case, we need to backtrack one (or more, depending on the situation) step and try different paths to avoid getting stuck. To solve this, the software was built using the backtracking technique. So for each dead end, the program goes back one move and tries a different one.
 
@@ -50,14 +48,19 @@ def solution():
         possible_movements = possible_movements_function()
 
         if possible_movements == []:
-            """If there are no possible movements, we return False. This will remove this move from the solution vector, backtrack one movement, and try other alternative moves."""
+            """If there are no possible movements, we return False. 
+            This will remove this move from the solution vector, backtrack one movement,
+            and try other alternative moves."""
 
         for move in possible_movements:
             """Add the move to the solution vector and recursively check if this move leads to a solution.
 
-            If the move chosen in the above step doesn't lead to a solution, then remove this move from the solution vector and try other alternative moves.
+            If the move chosen in the above step doesn't lead to a solution, then remove this
+            move from the solution vector and try other alternative moves.
 
-            If none of the alternatives work, then return false. Returning false will remove the previously added item in recursion, and if false is returned by the initial call of recursion, then "no solution exists.""""
+            If none of the alternatives work, then return false. Returning false will remove
+            the previously added item in recursion, and if false is returned by the initial
+            call of recursion, then "no solution exists.""""
 
 ``` 
 
@@ -75,9 +78,24 @@ Let's elaborate on this a bit more and try to understand it. The primary objecti
 
 ## Getting Started
 
-### Prerequisites
-### Installation
+Firsty lets clone and enter this repositorie on you local machine:
+```bash
+   git clone https://github.com/your/repo.git
+   cd your-repo-directory
+```
+To run this project on your local machine you'll need python installed. When you get python installed you need to install some python libraries, these are numpy and Pygame. They are already on the requirements file, so you can just run the following comand on your local project directory:
 
+```bash
+   pip install -r requirements.txt
+```
+
+If you want to install them manually, these are the versions:
+```bash
+numpy==1.26.0
+pygame==2.5.2
+```
+
+## Usage
 
 ## References
 
