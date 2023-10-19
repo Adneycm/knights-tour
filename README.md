@@ -35,7 +35,7 @@ Now, you can see that we have only 7 possible moves since we have already been t
 
 In the example above, the knight moved as follows: F4, G6, E5, F7, and H8. From position H8, the knight has two options: G6 and F7, but unfortunately, these have already been visited. In this case, we need to backtrack one (or more, depending on the situation) step and try different paths to avoid getting stuck. To solve this, the software was built using the backtracking technique. So for each dead end, the program goes back one move and tries a different one.
 
-<img src="assets/img/backtracking.png" width="300">
+<img src="assets/img/backtracking.png" width="600">
 
 ### Recursion
 
