@@ -23,18 +23,19 @@ This project presents an engaging exploration of the Knight's Tour problem acros
 
 First, let's begin by visualizing and considering how to tackle the Knight's Tour problem. Let's assume we start at position D5. Now, let's examine the potential moves available from this starting point:
 
-<img src="assets/img/example1.png">
+<img src="assets/img/example1.png" width="300">
 
 Because the knight moves in an 'L' shape, involving 2 moves in one direction and 1 in another, we have a total of 8 potential moves at our disposal. Let's select one:
 
-<img src="assets/img/example2.png">
+<img src="assets/img/example2.png" width="300">
 
 Now, you can see that we have only 7 possible moves since we have already been to one of them (D5). It's important to keep in mind that making the wrong choices of movements can lead to getting stuck in the tour. Let's take a look at the example below:
 
-<img src="assets/img/example3.png">
+<img src="assets/img/example3.png" width="300">
 
 In the example above, the knight moved as follows: F4, G6, E5, F7, and H8. From position H8, the knight has two options: G6 and F7, but unfortunately, these have already been visited. In this case, we need to backtrack one (or more, depending on the situation) step and try different paths to avoid getting stuck. To solve this, the software was built using the backtracking technique. So for each dead end, the program goes back one move and tries a different one.
-<img src="assets/img/backtracking.png">
+
+<img src="assets/img/backtracking.png" width="300">
 
 ### Recursion
 
