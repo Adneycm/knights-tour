@@ -8,7 +8,6 @@ The Knight's Tour, a actually a mathematical problem ([Hamiltonian Path](https:/
   - [Warnsdorff's Rule](#warnsdorffs-rule)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
-- [Features](#features)
 - [Acknowledgements](#acknowledgements)
 - [References](#references)
 
@@ -78,18 +77,20 @@ Let's elaborate on this a bit more and try to understand it. The primary objecti
 
 ## Getting Started
 
-Firsty lets clone and enter this repositorie on you local machine:
+First, let's clone and enter this repository on your local machine:
+
 ```bash
-   git clone https://github.com/your/repo.git
-   cd your-repo-directory
+   git clone https://github.com/Adneycm/knights-tour.git
+   cd knights-tour
 ```
-To run this project on your local machine you'll need python installed. When you get python installed you need to install some python libraries, these are numpy and Pygame. They are already on the requirements file, so you can just run the following comand on your local project directory:
+To run this project on your local machine, you'll need to have Python installed. Once you have Python installed, you also need to install some Python libraries, namely numpy and Pygame. These libraries are already listed in the requirements file, so you can simply run the following command in your local project directory:
 
 ```bash
    pip install -r requirements.txt
 ```
 
-If you want to install them manually, these are the versions:
+If you prefer to install them manually, here are the specific versions:
+
 ```bash
 numpy==1.26.0
 pygame==2.5.2
@@ -97,7 +98,25 @@ pygame==2.5.2
 
 ## Usage
 
+I've prepared a video teaching how to use it, and you can simply watch it by clicking on this link: [Youtube Video]()
+
+To run the application, you can use the following command:
+```bash
+   python main.py
+```
+You can choose the starting position of the tour by clicking on any square of the chessboard. After the tour is finished, you can press 'C' to clear the chessboard and start a new tour. You can also select different chessboard sizes by pressing 5, 6, 7, 8, or 9.
+
+
+## Acknowledgements
+
+I'd like to provide some sources of inspiration and further study materials related to this project:
+
+- [Knight's Tour - Numberphile](https://www.youtube.com/watch?v=ab_dY3dZFHM&t=96s)
+- [Image Encryption Scheme Based on Knight’s Tour Problem](https://pdf.sciencedirectassets.com/280203/1-s2.0-S1877050915X00329/1-s2.0-S1877050915032457/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjELn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIF4GyojL%2Fs3KvJeLJ%2BmybZxBXbW%2Ff%2B9uKvvQgRvmm%2BgSAiEAkY%2B0Rc28DCgzZaSsg7Q63Dico84kxqZB3wg2m2kyIlcqvAUI0v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAFGgwwNTkwMDM1NDY4NjUiDHkk9HTwfvhH6OgmUyqQBSkOa9UMliuTNbpJJMFDo11J6thCxRr79nLEw7b01YGc6SxYqRR3ljhlGb979xGl8My5tsGlewI4%2F8TdCijqmPRPN8RzC3JHelaBROhD6JHZ2ajD93B0cMCUkhcRqa%2FMbTMjB%2F3L6eRqHC0iMs46jcRNdb1g%2Fkz40gO%2Fw4ikaeBpG0yC9TZAyAP%2F0ln1NtWZTAExfi2sbYPR0o9o1%2FInMouaK4bZYV6siwjN2GQIwkJlbTuAxTQM0bA3e47rw70VokQftr6t68lg5GJDAxN5VlvVlhunFAdlokLZkrVAXE7AjfQKlmn81AP6tlCe2MutP74r5MGgdsemAcGboqr280%2B5aDxwlLfMtYzYZoXJJsbVlCviFUfA6N9F7%2Fd3fbswe9CojhyUZkJXiVwl2KZhZHezXcpZJkcQTF5GINNm%2Fq%2FWBHxcP4JVR0I1pU4Q5MXjyyKkaZqWjWWyiox%2Ff%2Fj5FkuzMD6Mh3HoMxINdkWJSSuJ0jEGqgka%2FX6H7ZVBRQTpZedP%2BNno6N9RnVqYU3aRkCGuK5fF%2Ft7OZ97RQbmnLKDTotX3g7OZsyuZWoOax7y9Or5QrO8HX%2F%2BT0Nn2AQeolAqhRxSA%2Bb1KeXawOJ9POul987wTS7jHEsmxpcUMSfGvU8cJbPuHFLRwlg%2Fw4GyUR3WeM9zPwT%2Fw6knQZoRtIBhZaNPn3NBd0gBPySrtKNgAesqFmjYzMANo5w1qpeCeD0f7t18NzfMimsLT%2B5fyPA7V45fEVWxAmhahLLwlJF6EdzFb7lV5WjGm68QDoMColFjJP%2B%2FXqymuRwt1qDF4GO65hr6oxaDJW9LRlSSjBxxlXuN4FZCq9dv4z%2Bj4LNwn5ljOwfQkX8KSs81jjWzGNcUVMLT0yKkGOrEB2DzN8Dv7uQljS6aqslOBNZ7%2B6FC%2Be1XVBFXkrLdCbnbGySuU5WuZX6Ibd6U8v2v%2BVaHnyY%2BNmvGoQCeODboFqLLGflJaK18MqwrMjAsHAH8eZv%2FmSCDihbTFQT4drUfwdj8CSw1m0Yj7Yquq%2BRH%2BKBDaA%2Fcwjfv4WDqSmPTV%2B9Rij0cko7blaDqm3A4EAJik0faXI0EigVdhvBEhZ%2BZUlE%2B0dHlt%2Fbfs7RFZ6V1402r9&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20231020T090959Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTY3BOYPW4I%2F20231020%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=a3390b981b25041d8a46d0ef42fb7e225a345fdd45f4e71b33b4f9d5c709f1b6&hash=1b4e10b08966fd0b49c709b05ee5e02915a525c1f4136b24f006376a25322a16&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S1877050915032457&tid=spdf-8568cad1-5d58-450a-b19e-81d7ae777abc&sid=6710149f94c7644b9c783e39a3e4cb999167gxrqb&type=client&tsoh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&ua=1e035a555c52505f555d03&rr=81902003fca6716c&cc=de)
+- [How good is the Warnsdorff’s knight’s tour heuristic?](https://arxiv.org/pdf/0803.4321.pdf)
+
 ## References
 
 - https://www.chess.com/analysis?tab=analysis
 - https://support.sas.com/resources/papers/proceedings15/3060-2015.pdf
+- https://www.geeksforgeeks.org/hamiltonian-cycle/
