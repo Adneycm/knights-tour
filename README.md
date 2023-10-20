@@ -71,7 +71,7 @@ This simple rule was formulated by the German mathematician H.C. Warnsdorff in 1
 
 > **Always move the knight to an adjacent, unvisited square with minimal degree.**
 
-Let's elaborate on this a bit more and try to understand it. The primary objective of this rule is to move the knight to an unvisited square that has the fewest possible moves. However, because Warnsdorff’s rule is heuristic, it is not guaranteed to find a solution.
+The primary objective of this rule is to move the knight to an unvisited square that has the fewest possible moves. However, because Warnsdorff’s rule is heuristic, it is not guaranteed to find a solution.
 
 
 
