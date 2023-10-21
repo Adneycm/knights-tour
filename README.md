@@ -1,7 +1,7 @@
 # Knight’s Tour
 The Knight's Tour, a actually a mathematical problem ([Hamiltonian Path](https://www.geeksforgeeks.org/hamiltonian-cycle/)) with origins dating back to the ninth century, involves a knight commencing its journey from any square on the board and then maneuvering through the remaining squares, all without revisiting any previously occupied square. 
 
-<img src="assets/img/knights-tour.gif" width="410" alt="Knight’s Tour">
+<img src="assets/img/knights-tour.gif" width="450" alt="Knight’s Tour">
 
 ## Table of Contents
 - [About](#about)
