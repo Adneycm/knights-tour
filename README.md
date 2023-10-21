@@ -100,7 +100,7 @@ pygame==2.5.2
 
 ## Usage
 
-I've prepared a video teaching how to use it, and you can simply watch it by clicking on this link: [Youtube Video]()
+I've prepared a video teaching how to use it, and you can simply watch it by clicking on this link: [Youtube Video](https://youtu.be/8CPygzjBEkY)
 
 To run the application, you can use the following command:
 ```bash
